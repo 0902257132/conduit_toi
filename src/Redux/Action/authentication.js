@@ -18,11 +18,11 @@ export const actionDisplayBlock = () => {
         type: typeActions.STATUS_BLOCK,
     }
 }
-export const actionSignIn = (name, password)=> {
+export const actionSignIn = (email, password)=> {
     return{
         type: typeActions.SIGN_IN,
         payload: {
-            name,
+            email,
             password
         }
     }
