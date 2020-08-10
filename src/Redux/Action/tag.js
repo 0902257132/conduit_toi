@@ -5,3 +5,8 @@ export const loadTag = listTags => {
         listTags
     }
 }
+export const fetchTag = () =>{
+    return{
+        type: actionTypes.FETCH_TAG
+    }
+}

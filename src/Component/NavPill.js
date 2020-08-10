@@ -1,31 +1,32 @@
 import React from "react";
-import {useSelector} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import NavPillChild from "./NavPillChild";
+import { actionFetchArticles } from "./../Redux/Action/articles";
 
 function NavPill() {
-    const state = useSelector(state => state.Articles.tagNav.item)
-    return (
-        <div>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link active"
-                        id="home-tab"
-                        data-toggle="tab"
-                        href="#menu1"
-                        role="tab"
-                        aria-controls="home"
-                        aria-selected="true"
-                    >
-                        Global Feed
-            </a>
-                </li>
-                {
-                    <NavPillChild tagNav={state}/>
-                }
-               
-            </ul>
-        </div>
-    )
+  const state = useSelector((state) => state.Articles.tagNav);
+  const dispatch = useDispatch();
+  return (
+    <div>
+      <ul className="nav nav-tabs" id="myTab" role="tablist">
+        <li className="nav-item" role="presentation">
+          <a
+            className="nav-link"
+            data-toggle="tab"
+            href="/"
+            role="tab"
+            aria-controls="home"
+            aria-selected="true"
+            onClick={() => {
+              dispatch(actionFetchArticles());
+            }}
+          >
+            Global Feed
+          </a>
+        </li>
+        {<NavPillChild tagNav={state} />}
+      </ul>
+    </div>
+  );
 }
-export default NavPill
+export default NavPill;
