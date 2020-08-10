@@ -35,3 +35,27 @@ export const actionFetchComment = (endpoint) => {
   let url = "/api/articles/" + endpoint + "/comments";
   return axios.get(url);
 };
+export const actiondeleteComment = (payload) => {
+  const { slug, idPost, token } = payload;
+  return axios.delete("/api/articles/" + slug + "/comments/" + idPost, {
+    headers: {
+      Authorization: "Token " + token,
+    },
+  });
+};
+export const actionPostComment = (payload) => {
+  const { slug, comment, token } = payload;
+  return axios.post(
+    "/api/articles/" + slug + "/comments",
+    {
+      comment: {
+        body: comment,
+      },
+    },
+    {
+      headers: {
+        Authorization: " Token " + token,
+      },
+    }
+  );
+};

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCompare } from "./../../Redux/Action/postingDetail";
-import axios from "./../../Axios/index";
+import * as typeActions from "./../../Redux/Const/TagTypes";
 
 function TotalComment(props) {
+  const dispatch = useDispatch();
   const { author, body, createdAt } = props.item;
   const [status, setStatus] = useState("none");
   const userAuthen = sessionStorage.userName;
@@ -13,9 +13,12 @@ function TotalComment(props) {
   }, []);
 
   const deleteComment = () => {
-    axios.delete("/api/articles/" + props.slug + "/comments/" + props.item.id, {
-      headers: {
-        Authorization: "Token " + sessionStorage.token,
+    dispatch({
+      type: typeActions.DELETE_COMMENT,
+      payload: {
+        slug: props.slug,
+        idPost: props.item.id,
+        token: sessionStorage.token,
       },
     });
   };

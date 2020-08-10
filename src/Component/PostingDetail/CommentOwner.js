@@ -1,26 +1,22 @@
 import React, { useState } from "react";
-import axios from "./../../Axios/index";
+import { useDispatch } from "react-redux";
+import * as typeActions from "./../../Redux/Const/TagTypes";
 
 function CommentOwner(props) {
+  const dispatch = useDispatch();
   const [textComment, setTextComment] = useState("");
   const handleOnChange = (event) => {
     setTextComment(event.target.value);
   };
   const handleOnClick = () => {
-    const result = axios.post(
-      "/api/articles/" + props.slug + "/comments",
-      {
-        comment: {
-          body: textComment,
-        },
+    dispatch({
+      type: typeActions.POST_COMMENT,
+      payload: {
+        slug: props.slug,
+        comment: textComment,
+        token: sessionStorage.token,
       },
-      {
-        headers: {
-          Authorization: " Token " + sessionStorage.token,
-        },
-      }
-    );
-    console.log("ONCLICK", result);
+    });
   };
   return (
     <div className="card comment-form">
