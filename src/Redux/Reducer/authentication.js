@@ -11,7 +11,8 @@ const initialState = {
 const reducerAuthentication = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_AUTHENTICATION:
-      const { userName, email, token, id } = action;
+      const { userName, email, token, id } = action.action;
+      console.log("AUTHEN : ", action);
       return {
         ...state,
         userName,

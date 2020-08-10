@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import Login from "./Login";
 import HomePage from "./Body";
 import PostingDetail from "./PostingDetail/index";
+import BookStore from "./BookStore/index";
 
 function Header() {
   const statusAuthen = useSelector((state) => state.Authen.statusAuthenFeature);
@@ -41,6 +42,11 @@ function Header() {
                 <li style={{ display: statusAuthen }}>
                   <NavLink to="/userName">{userName}</NavLink>
                 </li>
+                <li>
+                  <NavLink exact to="/BookStore">
+                    Book store
+                  </NavLink>
+                </li>
               </ul>
             </nav>
           </div>
@@ -56,6 +62,7 @@ function Header() {
             return <PostingDetail {...props} />;
           }}
         />
+        <Route path="/BookStore" component={BookStore} />
       </div>
     </Router>
   );

@@ -1,17 +1,17 @@
 import * as actionTypes from "./../Const/TagTypes";
 
 const initialState = {
-  listTags: [],
+  tests: "",
 };
-const reducerTag = (state = initialState, action) => {
+const reducerTests = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.LOAD_TAG:
+    case actionTypes.FETCH_LIST_BOOKSTORE_SUCCESS:
       return {
         ...state,
-        listTags: action.listTags,
+        tests: action.payload,
       };
     default:
       return state;
   }
 };
-export default reducerTag;
+export default reducerTests;

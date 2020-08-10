@@ -5,7 +5,7 @@ import reducerLoading from "./loading";
 import reducerAuthentication from "./authentication";
 import reducerArticleSlug from "./slugArticle";
 import reducerComment from "./comment";
-import reducerFeaturesPosting from "./postingDetail";
+import reducerTest from "./test";
 
 const rootReducer = combineReducers({
   Tags: reducerTag,
@@ -14,6 +14,6 @@ const rootReducer = combineReducers({
   Authen: reducerAuthentication,
   ArticleSlug: reducerArticleSlug,
   Comments: reducerComment,
-  StatusFeaturePosting: reducerFeaturesPosting,
+  ListTests: reducerTest,
 });
 export default rootReducer;

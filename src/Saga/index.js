@@ -14,7 +14,6 @@ import {
   actionHiddenLoading,
 } from "./../Redux/Action/loading";
 import {
-  actionDisplayBlock,
   actionDisplayNone,
   actionSaveValuesAuthen,
 } from "./../Redux/Action/authentication";
@@ -25,12 +24,16 @@ import {
   actionFetchhUser,
   actionFetchArticleSlug,
   actionFetchComment,
+  actiondeleteComment,
+  actionPostComment,
 } from "./../Redux/Action/api";
 import { loadTag } from "./../Redux/Action/tag";
 import { actionLoadArticles } from "./../Redux/Action/articles";
 import { actionSuccessFetchSlug } from "./../Redux/Action/slugArticle";
 import { actionFetchCommentSuccess } from "./../Redux/Action/comment";
-import { useHistory } from "react-router-dom";
+import { fetchListTests } from "./../Redux/Action/apiGraphQL";
+import * as typeQueryGraphQL from "./../Redux/Const/typeGraphQL";
+import { successFetchListTests } from "./../Redux/Action/test";
 
 function* manageTagActionAPI() {
   yield take(tagTypes.FETCH_TAG);
@@ -61,8 +64,8 @@ function* getUserInformation({ payload }) {
     const { id, username, email, token } = result.data.user;
     sessionStorage.setItem("userName", username);
     sessionStorage.setItem("token", token);
-    yield put(actionSaveValuesAuthen(id, username, email, token));
-    // browserHistory.push('subscribe-success');
+    const payload = { id, username, email, token };
+    yield put(actionSaveValuesAuthen(payload));
   } else yield console.log("FAILED FECTCH USER");
 }
 
@@ -80,9 +83,40 @@ function* getComment({ payload }) {
     yield put(actionFetchCommentSuccess(result.data.comments));
   else console.log("FECTCH_COMMENT_FAILED");
 }
+// Xóa comment của 1 bài post
+function* deleteComment({ payload }) {
+  const result = yield call(actiondeleteComment, payload);
+  if (result.status !== tagTypes.STATUS_API.SUCCESS)
+    console.log("DELETE_FAILED");
+  else console.log("DELETE_SUCCESS");
+}
+//Đăng một comment
+function* postComment({ payload }) {
+  const result = yield call(actionPostComment, payload);
+  if (result.status === tagTypes.STATUS_API.SUCCESS)
+    console.log("POST_SUCCESS");
+  else console.log("POST_FAILED");
+}
+// Lấy data list Test thông qua GraphQL
+function* fecthListTestBookStore() {
+  const result = yield call(
+    fetchListTests,
+    typeQueryGraphQL.QUERY_GET_ALL_TESTS
+  );
+  yield put(actionShowLoading());
+  yield delay(500);
+  yield put(actionHiddenLoading());
+  if (result.status === tagTypes.STATUS_API.SUCCESS)
+    yield put(successFetchListTests(result.data.data.allTests));
+  else console.log("FAILED FETCH LIST TESTS");
+}
 function* manageAuthenFeature() {
   yield take(tagTypes.SAVE_AUTHENTICATION);
-  yield put(actionDisplayBlock());
+  yield put(() => {
+    return {
+      type: tagTypes.STATUS_BLOCK,
+    };
+  });
 }
 function* manageListLoadActions() {
   while (true) {
@@ -103,6 +137,9 @@ export default function* rootSaga() {
   yield takeEvery(tagTypes.SIGN_IN, getUserInformation);
   yield takeEvery(tagTypes.FETCH_SLUG, getArticleSlug);
   yield takeEvery(tagTypes.FETCH_COMMENT, getComment);
+  yield takeEvery(tagTypes.DELETE_COMMENT, deleteComment);
+  yield takeEvery(tagTypes.POST_COMMENT, postComment);
+  yield takeEvery(tagTypes.FETCH_LIST_BOOKSTORE, fecthListTestBookStore);
   yield fork(manageTagActionAPI);
   yield fork(manageArticlesActionAPI);
   yield fork(manageListLoadActions);
