@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/conduit_toi/static/css/main.dce4e2cc.chunk.css",
+    "main.js": "/conduit_toi/static/js/main.7a955528.chunk.js",
+    "main.js.map": "/conduit_toi/static/js/main.7a955528.chunk.js.map",
+    "runtime-main.js": "/conduit_toi/static/js/runtime-main.f6c3ed72.js",
+    "runtime-main.js.map": "/conduit_toi/static/js/runtime-main.f6c3ed72.js.map",
+    "static/js/2.447d8da9.chunk.js": "/conduit_toi/static/js/2.447d8da9.chunk.js",
+    "static/js/2.447d8da9.chunk.js.map": "/conduit_toi/static/js/2.447d8da9.chunk.js.map",
+    "index.html": "/conduit_toi/index.html",
+    "precache-manifest.5b3bcda58fb2796dae19d7e3ce376104.js": "/conduit_toi/precache-manifest.5b3bcda58fb2796dae19d7e3ce376104.js",
+    "service-worker.js": "/conduit_toi/service-worker.js",
+    "static/css/main.dce4e2cc.chunk.css.map": "/conduit_toi/static/css/main.dce4e2cc.chunk.css.map",
+    "static/js/2.447d8da9.chunk.js.LICENSE.txt": "/conduit_toi/static/js/2.447d8da9.chunk.js.LICENSE.txt",
+    "static/media/loading.gif": "/conduit_toi/static/media/loading.5bc723f8.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f6c3ed72.js",
+    "static/js/2.447d8da9.chunk.js",
+    "static/css/main.dce4e2cc.chunk.css",
+    "static/js/main.7a955528.chunk.js"
+  ]
+}
